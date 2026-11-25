@@ -1,0 +1,42 @@
+{
+  "name": "expo-text-selectable",
+  "version": "0.1.0",
+  "description": "Native selection of read-only text and inline spans in Expo apps",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build",
+    "ios",
+    "expo-module.config.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "expo": "^58.0.0",
+    "react": "^19.0.0",
+    "react-native": ">=0.88.0 <0.89.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "expo": "~58.0.25",
+    "react": "19.3.0",
+    "react-native": "0.88.1",
+    "typescript": "~6.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/burakkacmaz/expo-text-selectable.git"
+  },
+  "author": "Burak Ka\u00e7maz",
+  "license": "MIT",
+  "keywords": [
+    "expo",
+    "react-native",
+    "ios",
+    "text-selection",
+    "uitextview"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "expo": {
+    "name": "Selectable Text Example",
+    "slug": "expo-text-selectable-example",
+    "ios": { "bundleIdentifier": "dev.burakkacmaz.selectabletext.example" },
+    "android": { "package": "dev.burakkacmaz.selectabletext.example" }
+  }
+}
