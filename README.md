@@ -2,7 +2,7 @@
 
 Read-only text with native selection handles on iOS. Inline spans share a single selection range, so a copy operation can cross formatting boundaries. Android uses React Native's selectable text.
 
-![Long-pressing plain text and then styled text to select words on iOS.](https://raw.githubusercontent.com/burakkacmaz/expo-text-selectable/main/docs/ios-selection.gif)
+![Dragging iOS selection handles across a plain sentence and across both styled spans.](https://raw.githubusercontent.com/burakkacmaz/expo-text-selectable/main/docs/ios-selection.gif?v=2)
 
 ## Installation
 
