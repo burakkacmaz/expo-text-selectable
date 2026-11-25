@@ -58,7 +58,7 @@ Arbitrary React elements inside the text use the React Native fallback.
 
 ## Expo SDK compatibility
 
-Selection was verified on iOS and Android with Expo SDK 52, 53, 55, and 58. Version `0.1.1` declares Expo SDK 58 and React Native 0.88 in its npm peer dependencies. The older SDK checks used `--legacy-peer-deps` in separate test projects. The native iOS module requires iOS 16.4 or later.
+Selection was verified on iOS and Android with Expo SDK 52, 53, 55, and 58. The package declares Expo SDK 58 and React Native 0.88 in its npm peer dependencies. The older SDK checks used `--legacy-peer-deps` in separate test projects. The native iOS module requires iOS 16.4 or later.
 
 ## License
 

@@ -1,6 +1,6 @@
 {
   "name": "expo-text-selectable",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Native selection of read-only text and inline spans in Expo apps",
   "main": "build/index.js",
   "types": "build/index.d.ts",
