@@ -24,8 +24,9 @@ struct SelectableTextContent: Record {
   @Field var ellipsizeMode: String = "tail"
 }
 
-final class ExpoTextSelectableView: ExpoView {
+final class ExpoTextSelectableView: ExpoView, UITextViewDelegate, UIGestureRecognizerDelegate {
   private let textView = UITextView(usingTextLayoutManager: false)
+  private lazy var outsideTap = UITapGestureRecognizer(target: self, action: #selector(clearSelection))
 
   required init(appContext: AppContext? = nil) {
     super.init(appContext: appContext)
@@ -35,7 +36,43 @@ final class ExpoTextSelectableView: ExpoView {
     textView.backgroundColor = .clear
     textView.textContainerInset = .zero
     textView.textContainer.lineFragmentPadding = 0
+    textView.delegate = self
     addSubview(textView)
+  }
+
+  override func didMoveToWindow() {
+    super.didMoveToWindow()
+    updateOutsideTap()
+  }
+
+  func textViewDidChangeSelection(_ textView: UITextView) {
+    updateOutsideTap()
+  }
+
+  private func updateOutsideTap() {
+    let selectionWindow = textView.selectedRange.length > 0 ? window : nil
+    guard outsideTap.view !== selectionWindow else { return }
+    outsideTap.view?.removeGestureRecognizer(outsideTap)
+    outsideTap.delegate = self
+    outsideTap.cancelsTouchesInView = false
+    selectionWindow?.addGestureRecognizer(outsideTap)
+  }
+
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    guard let touchedView = touch.view else { return false }
+    return !touchedView.isDescendant(of: textView)
+  }
+
+  func gestureRecognizer(
+    _ gestureRecognizer: UIGestureRecognizer,
+    shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+  ) -> Bool {
+    true
+  }
+
+  @objc private func clearSelection() {
+    textView.selectedTextRange = nil
+    textView.resignFirstResponder()
   }
 
   override func layoutSubviews() {
