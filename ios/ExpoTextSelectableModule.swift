@@ -57,14 +57,16 @@ final class ExpoTextSelectableView: ExpoView {
     let weights: [String: UIFont.Weight] = [
       "100": .ultraLight, "200": .thin, "300": .light, "400": .regular,
       "500": .medium, "600": .semibold, "700": .bold, "800": .heavy,
-      "900": .black, "normal": .regular, "bold": .bold
+      "900": .black, "normal": .regular, "bold": .bold, "ultralight": .ultraLight,
+      "thin": .thin, "light": .light, "regular": .regular, "medium": .medium,
+      "semibold": .semibold, "heavy": .heavy, "black": .black
     ]
     guard let weight = weights[fontWeight] else { return font }
     if family.isEmpty { return .systemFont(ofSize: size, weight: weight) }
 
     let descriptor = UIFontDescriptor(fontAttributes: [
       .family: font.familyName,
-      .traits: [UIFontDescriptor.TraitKey.weight: weight]
+      .traits: [UIFontDescriptor.TraitKey.weight: weight.rawValue]
     ])
     return UIFont(descriptor: descriptor, size: size)
   }
@@ -73,7 +75,11 @@ final class ExpoTextSelectableView: ExpoView {
     let font = resolveFont(content.fontFamily, size: content.fontSize)
     let paragraph = NSMutableParagraphStyle()
 
+    let isRTL = content.writingDirection == "rtl" ||
+      (content.writingDirection == "auto" && effectiveUserInterfaceLayoutDirection == .rightToLeft)
     switch content.alignment {
+    case "start": paragraph.alignment = isRTL ? .right : .left
+    case "end": paragraph.alignment = isRTL ? .left : .right
     case "left": paragraph.alignment = .left
     case "right": paragraph.alignment = .right
     case "center": paragraph.alignment = .center

@@ -34,7 +34,7 @@ type Run = InlineStyle & { text: string };
 
 type NativeProps = ViewProps & {
   content: {
-    runs: Run[];
+    runs: (Omit<Run, "fontWeight"> & { fontWeight?: string })[];
     fontSize?: number;
     lineHeight?: number;
     color?: TextStyle["color"];
@@ -138,6 +138,7 @@ function SelectableTextRoot({
           content={{
             runs: runs.map((run) => ({
               ...run,
+              fontWeight: run.fontWeight === undefined ? undefined : String(run.fontWeight),
               fontSize: run.fontSize === undefined ? undefined : run.fontSize * scale,
               letterSpacing: run.letterSpacing === undefined ? undefined : run.letterSpacing * scale,
             })),
